@@ -30,14 +30,7 @@
         :key="task.date"
         class="flex items-center gap-2 p-2 border rounded-lg"
       >
-        <input
-          type="checkbox"
-          v-model="task.completed"
-          class="form-checkbox h-5 w-5"
-        />
-        <span :class="{ completed: task.completed }" class="flex-1">{{
-          task.title
-        }}</span>
+        <Checkbox :task="task" />
       </li>
     </ul>
 
@@ -55,6 +48,8 @@
 
 <script setup>
 import { ref, computed } from "vue";
+
+import Checkbox from "./components/Checkbox.vue";
 
 const tasks = ref([]); // Liste des tâches
 const newTask = ref(""); // Nouvelle tâche en cours de saisie
