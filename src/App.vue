@@ -48,12 +48,19 @@
 
 <script setup>
 import { ref, computed } from "vue";
+import { onMounted } from "vue";
 
 import Checkbox from "./components/Checkbox.vue";
 
 const tasks = ref([]); // Liste des tâches
 const newTask = ref(""); // Nouvelle tâche en cours de saisie
 const hideCompletedTask = ref(false); // État pour masquer ou non les tâches complétées
+
+onMounted(() => {
+  fetch("https://jsonplaceholder.typicode.com/todos")
+    .then((r) => r.json())
+    .then((v) => (tasks.value = v.map((todo) => ({ ...todo, date: todo.id }))));
+});
 
 // Fonction pour ajouter une nouvelle tâche
 const addTask = () => {
